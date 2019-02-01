@@ -1,0 +1,11 @@
+CREATE DATABASE `hr-bot` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `hr-bot`.`stages` ( `id` INT NOT NULL AUTO_INCREMENT , `stage_order` INT NOT NULL , `name` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `hr-bot`.`clients` ( `id` INT NOT NULL AUTO_INCREMENT , `id_stage` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `clients` ADD INDEX(`id_stage`);
+ALTER TABLE `clients` ADD FOREIGN KEY (`id_stage`) REFERENCES `hr-bot`.`stages`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO `hr-bot`.`stages` (`id`, `stage_order`, `name`) VALUES ('NULL', '1', 'Первый этап'), ('NULL', '3', 'Третий этап'), ('NULL', '2', 'Второй этап'), ('NULL', '4', 'Четвёртый этап');
+INSERT INTO `hr-bot`.`clients` (`id`, `id_stage`) VALUES ('NULL', '1'), ('NULL', '2'), ('NULL', '1'), ('NULL', '3'), ('NULL', '2'), ('NULL', '3'), ('NULL', '1'), ('NULL', '2'), ('NULL', '1'), ('NULL', '4');
